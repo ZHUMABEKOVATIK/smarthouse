@@ -1,8 +1,8 @@
 import uvicorn
 from fastapi import FastAPI
 
-from src.core import lifespan_setup, setup_cors, register_exception_handlers
-from src.api import routers
+from .core import lifespan_setup, setup_cors, register_exception_handlers
+from .api import routers
 
 app = FastAPI(
     title="Smart House",
@@ -12,6 +12,11 @@ app = FastAPI(
 
 setup_cors(app)
 register_exception_handlers(app)
+
+
+@app.get("/")
+async def home():
+    return "Developed at Bizler Group"
 
 app.include_router(routers)
 
