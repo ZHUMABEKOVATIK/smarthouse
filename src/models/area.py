@@ -1,24 +1,17 @@
 from src.database.base import Base
 
 from sqlalchemy.orm import (
-    Mapped, 
-    mapped_column, 
+    Mapped,
+    mapped_column,
     relationship
 )
 
 from sqlalchemy import (
     BigInteger, 
-    String, 
-    DateTime, 
-    func, 
-    Enum as SQLEnum,
-    ForeignKey
+    String
 )
 
-from datetime import datetime
-from enum import Enum
-
-from src.models.users import Users
+from .users import Users
 
 class Area(Base):
     __tablename__ = "area"
