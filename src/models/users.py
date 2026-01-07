@@ -13,10 +13,10 @@ class Users(Base):
     __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
-    lastname: Mapped[str] = mapped_column(String(100), nullable=True)
+    lastname: Mapped[str | None] = mapped_column(String(100), nullable=True)
     firstname: Mapped[str] = mapped_column(String(100), nullable=False)
-    area_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("area.id", ondelete="SET NULL"), nullable=True)
-    city_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("city.id", ondelete="SET NULL"), nullable=True)
+    area_id: Mapped[int | None] = mapped_column(BigInteger, ForeignKey("area.id", ondelete="SET NULL"), nullable=True)
+    city_id: Mapped[int | None] = mapped_column(BigInteger, ForeignKey("city.id", ondelete="SET NULL"), nullable=True)
     phone: Mapped[str] = mapped_column(String, nullable=False, unique=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
 
