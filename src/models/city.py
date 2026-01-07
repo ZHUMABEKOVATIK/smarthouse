@@ -21,4 +21,4 @@ class City(Base):
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String, nullable=False)
 
-    users: Mapped[list["Users"]] = relationship(back_populates="city")
+    users: Mapped[list["Users"]] = relationship("Users", back_populates="city", lazy="selectin", passive_deletes=True)
