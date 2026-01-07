@@ -1,21 +1,22 @@
 from src.database.base import Base
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import BigInteger, String, DateTime, func
+from sqlalchemy import BigInteger, String, DateTime, func, ForeignKey
 from datetime import datetime
 
-from src.models.chats import Chats
+from .area import Area
+from .city import City
 
 class Users(Base):
     __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
-    firstname: Mapped[str] = mapped_column(String(100), nullable=False)
     lastname: Mapped[str] = mapped_column(String(100), nullable=True)
-    email: Mapped[str] = mapped_column(String(100), nullable=False, unique=True)
-    username: Mapped[str] = mapped_column(String(100), nullable=False, unique=True)
-    password: Mapped[str] = mapped_column(String(100), nullable=False)
-    last_online: Mapped[datetime] = mapped_column(DateTime, default=func.now())
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=func.now())
+    firstname: Mapped[str] = mapped_column(String(100), nullable=False)
+    area_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("area.id", ondelete="SET NULL"), nullable=True)
+    city_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("city.id", ondelete="SET NULL"), nullable=True)
+    phone: Mapped[str] = mapped_column(String, nullable=False, unique=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
 
-    chats: Mapped[list["Chats"]] = relationship(back_populates="creator")
+    area: Mapped["Area"] = relationship(back_populates="users")
+    city: Mapped["City"] = relationship(back_populates="users")
