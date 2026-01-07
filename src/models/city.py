@@ -1,4 +1,5 @@
 from src.database.base import Base
+from typing import TYPE_CHECKING
 
 from sqlalchemy.orm import (
     Mapped, 
@@ -11,7 +12,8 @@ from sqlalchemy import (
     String
 )
 
-from src.models.users import Users
+if TYPE_CHECKING:
+    from src.models.users import Users
 
 class City(Base):
     __tablename__ = "city"

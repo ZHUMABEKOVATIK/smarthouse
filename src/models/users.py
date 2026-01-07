@@ -1,11 +1,13 @@
 from src.database.base import Base
+from typing import TYPE_CHECKING
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import BigInteger, String, DateTime, func, ForeignKey
 from datetime import datetime
 
-from .area import Area
-from .city import City
+if TYPE_CHECKING:
+    from .area import Area
+    from .city import City
 
 class Users(Base):
     __tablename__ = "users"
