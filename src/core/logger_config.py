@@ -5,7 +5,7 @@ from pathlib import Path
 LOG_DIR = Path(__file__).resolve().parent / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 
-error_log = LOG_DIR / "errors.log"
+error_log = LOG_DIR / "error_logs.log"
 
 logger = logging.getLogger("myapp")
 logger.setLevel(logging.INFO)
